@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "ancientartifacts",
+  "version": "${version}",
+
+  "name": "Ancient Artifacts",
+  "description": "A mod adding mysterious powerful ancient artifacts to Minecraft!",
+  "authors": [
+    "Murren"
+  ],
+
+  "license": "MIT",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.murren.ancientartifacts.Main"
+    ]
+  },
+  "mixins": [
+    "ancientartifacts.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.6",
+    "fabric": "*",
+    "minecraft": "~1.18.2",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
