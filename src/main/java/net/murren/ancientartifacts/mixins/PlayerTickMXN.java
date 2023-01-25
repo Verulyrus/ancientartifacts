@@ -76,7 +76,13 @@ abstract class PlayerTickMXN
             }
             if (haFound)
             {
-
+                if(inv.getMainHandStack().getItem() instanceof BowItem)
+                {
+                    inv.getMainHandStack().getOrCreateNbt().putBoolean("artifact", true);
+                }
+                else {
+                    inv.getMainHandStack().getOrCreateNbt().putBoolean("artifact", false);
+                }
             }
         }
     }

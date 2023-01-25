@@ -10,9 +10,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(BowItem.class)
 public class BowMXN
 {
-    @Inject(method = "getMaxUseTime", at = @At("HEAD"))
+    @Inject(method = "getMaxUseTime", at = @At("RETURN"), cancellable = true)
     private void maxUse(ItemStack stack, CallbackInfoReturnable<Integer> cir)
     {
-
+        if(stack.hasNbt())
+        {
+            if(stack.getNbt().contains("artifact"))
+            {
+                if(stack.getNbt().getBoolean("artifact"))
+                {
+                    cir.setReturnValue(36000);
+                }
+            }
+        }
     }
 }
