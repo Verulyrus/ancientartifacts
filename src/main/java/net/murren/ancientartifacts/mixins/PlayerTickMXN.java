@@ -11,7 +11,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static net.murren.ancientartifacts.item.ArtifactItems.*;
 
@@ -25,22 +24,6 @@ abstract class PlayerTickMXN
 
     @Shadow public abstract HungerManager getHungerManager();
 
-    @Inject(method = "getHungerManager", at = @At("HEAD"))
-    private void onHunger(CallbackInfoReturnable<HungerManager> cir)
-    {
-        PlayerInventory inv = getInventory();
-        for(int i = 0; i < inv.size(); i++)
-        {
-            if(inv.getStack(i).getItem().equals(saturation_artifact))
-            {
-                if (getHungerManager().isNotFull())
-                {
-                    getHungerManager().setFoodLevel(20);
-                }
-            }
-        }
-    }
-
     @Inject(method = "tick", at = @At("HEAD"))
     private void onAttributes(CallbackInfo ci)
     {
@@ -52,6 +35,13 @@ abstract class PlayerTickMXN
             if(inv.getStack(i).getItem().equals(toughness_artifact))
             {
                 taFound = true;
+            }
+            if(inv.getStack(i).getItem().equals(saturation_artifact))
+            {
+                if (getHungerManager().isNotFull())
+                {
+                    getHungerManager().setFoodLevel(20);
+                }
             }
         }
         if(taFound)
@@ -86,6 +76,4 @@ abstract class PlayerTickMXN
             }
         }
     }
-
-
 }

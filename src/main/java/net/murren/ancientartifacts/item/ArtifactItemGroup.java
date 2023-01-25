@@ -8,6 +8,6 @@ import net.murren.ancientartifacts.Main;
 
 public class ArtifactItemGroup
 {
-    public static ItemGroup ARTIFACTS = FabricItemGroupBuilder.build(new Identifier(Main.MOD_ID, "Artifacts"),
+    public static ItemGroup ARTIFACTS = FabricItemGroupBuilder.build(new Identifier(Main.MOD_ID, "artifacts"),
             () -> new ItemStack(ArtifactItems.empty_artifact));
 }
