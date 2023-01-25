@@ -4,7 +4,8 @@
   "package": "net.murren.ancientartifacts.mixins",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "PlayerTickMXN"
+    "PlayerTickMXN",
+    "BowMXN"
   ],
   "client": [
   ],

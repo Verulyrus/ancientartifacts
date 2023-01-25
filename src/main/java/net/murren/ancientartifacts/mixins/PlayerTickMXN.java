@@ -4,6 +4,8 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.HungerManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.BowItem;
+import net.minecraft.item.CrossbowItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -11,8 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static net.murren.ancientartifacts.item.ArtifactItems.saturation_artifact;
-import static net.murren.ancientartifacts.item.ArtifactItems.toughness_artifact;
+import static net.murren.ancientartifacts.item.ArtifactItems.*;
 
 @Mixin(PlayerEntity.class)
 abstract class PlayerTickMXN
@@ -43,16 +44,17 @@ abstract class PlayerTickMXN
     @Inject(method = "tick", at = @At("HEAD"))
     private void onAttributes(CallbackInfo ci)
     {
-        boolean itemFound = false;
         PlayerInventory inv = getInventory();
+
+        boolean taFound = false;
         for(int i = 0; i < inv.size(); i++)
         {
             if(inv.getStack(i).getItem().equals(toughness_artifact))
             {
-                itemFound = true;
+                taFound = true;
             }
         }
-        if(itemFound)
+        if(taFound)
         {
             PlayerEntity.createPlayerAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 40f);
         }
@@ -60,5 +62,24 @@ abstract class PlayerTickMXN
         {
             PlayerEntity.createPlayerAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 20f);
         }
+
+        boolean haFound = false;
+
+        if(inv.getMainHandStack().getItem() instanceof BowItem || inv.getMainHandStack().getItem() instanceof CrossbowItem);
+        {
+            for (int i = 0; i < inv.size(); i++)
+            {
+                if (inv.getStack(i).getItem().equals(hunter_artifact))
+                {
+                    haFound = true;
+                }
+            }
+            if (haFound)
+            {
+
+            }
+        }
     }
+
+
 }

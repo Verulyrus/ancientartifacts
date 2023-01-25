@@ -2,6 +2,7 @@
   "item.ancientartifacts.toughness_artifact": "Ancient Artifact of Toughness",
   "item.ancientartifacts.saturation_artifact": "Ancient Artifact of Saturation",
   "item.ancientartifacts.empty_artifact": "Mysterious Ancient Artifact",
+  "item.ancientartifacts.hunter_artifact": "Ancient Hunters Artifact",
 
   "itemGroup.ancientartifacts.artifacts": "Ancient Artifacts"
 }
