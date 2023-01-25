@@ -9,7 +9,7 @@ import net.murren.ancientartifacts.Main;
 
 public class ArtifactItems
 {
-    public static final Item empty_artifact = registerItem("empty_item",
+    public static final Item empty_artifact = registerItem("empty_artifact",
             new Item(new FabricItemSettings().group(ArtifactItemGroup.ARTIFACTS).maxCount(64).rarity(Rarity.RARE)));
     public static final Item toughness_artifact = registerItem("toughness_artifact",
             new Item(new FabricItemSettings().group(ArtifactItemGroup.ARTIFACTS).maxCount(1).rarity(Rarity.EPIC)));
