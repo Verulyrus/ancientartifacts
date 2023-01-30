@@ -1,11 +1,13 @@
 package net.murren.ancientartifacts.item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.minecraft.item.Item;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.Rarity;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import net.murren.ancientartifacts.Main;
+
+import static net.murren.ancientartifacts.Main.MOD_ID;
 
 public class ArtifactItems
 {
@@ -20,11 +22,11 @@ public class ArtifactItems
 
     private static Item registerItem(String name, Item item)
     {
-        return Registry.register(Registry.ITEM, new Identifier(Main.MOD_ID, name), item);
+        return Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, name), item);
     }
 
     public static void registerItems()
     {
-        Main.LOGGER.info("Registering Mod Items for " + Main.MOD_ID);
+        Main.LOGGER.info("Registering Mod Items for " + MOD_ID);
     }
 }

@@ -1,65 +1,50 @@
 package net.murren.ancientartifacts.mixins;
 
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.player.HungerManager;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.BowItem;
-import net.minecraft.item.CrossbowItem;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodData;
+import net.minecraft.world.item.BowItem;
+import net.minecraft.world.item.CrossbowItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import static net.murren.ancientartifacts.Util.InventoryItemFind.findItemInInventory;
 import static net.murren.ancientartifacts.item.ArtifactItems.*;
 
-@Mixin(PlayerEntity.class)
+@Mixin(Player.class)
 abstract class PlayerTickMXN {
-    @Shadow
-    public PlayerInventory getInventory() {
+    @Shadow public Inventory getInventory() {
         return null;
     }
 
-    @Shadow
-    public abstract HungerManager getHungerManager();
+    public abstract FoodData getHungerManager();
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void onAttributes(CallbackInfo ci) {
-        PlayerInventory inv = getInventory();
+        Inventory inv = getInventory();
 
-        boolean taFound = false;
-        for (int i = 0; i < inv.size(); i++) {
-            if (inv.getStack(i).getItem().equals(toughness_artifact)) {
-                taFound = true;
-            }
-            if (inv.getStack(i).getItem().equals(saturation_artifact)) {
-                if (getHungerManager().isNotFull()) {
-                    getHungerManager().setFoodLevel(20);
-                }
+        if (findItemInInventory(inv, saturation_artifact)) {
+            if (getHungerManager().needsFood()) {
+                getHungerManager().setFoodLevel(20);
             }
         }
-        if (taFound) {
-            PlayerEntity.createPlayerAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 40f);
+        if (findItemInInventory(inv, toughness_artifact)) {
+            //
         } else {
-            PlayerEntity.createPlayerAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 20f);
+            //
         }
 
-        boolean haFound = false;
-
-        if (inv.getMainHandStack().getItem() instanceof BowItem || inv.getMainHandStack().getItem() instanceof CrossbowItem);
+        if (inv.getSelected().getItem() instanceof BowItem || inv.getSelected().getItem() instanceof CrossbowItem);
         {
-            for (int i = 0; i < inv.size(); i++) {
-                if (inv.getStack(i).getItem().equals(hunter_artifact)) {
-                    haFound = true;
-                }
-            }
-            if (inv.getMainHandStack().getItem() instanceof BowItem) {
-                if (haFound) {
-                    inv.getMainHandStack().getOrCreateNbt().putBoolean("artifact", true);
+            if (inv.getSelected().getItem() instanceof BowItem) {
+                if (findItemInInventory(inv, hunter_artifact)) {
+                    inv.getSelected().getOrCreateTag().putBoolean("artifact", true);
                 }
                 else {
-                    inv.getMainHandStack().getOrCreateNbt().putBoolean("artifact", false);
+                    inv.getSelected().getOrCreateTag().putBoolean("artifact", false);
                 }
             }
         }
