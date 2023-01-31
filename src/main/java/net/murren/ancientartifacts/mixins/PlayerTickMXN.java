@@ -1,5 +1,7 @@
 package net.murren.ancientartifacts.mixins;
 
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
@@ -11,42 +13,42 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+
 import static net.murren.ancientartifacts.Util.InventoryItemFind.findItemInInventory;
 import static net.murren.ancientartifacts.item.ArtifactItems.*;
 
 @Mixin(Player.class)
 abstract class PlayerTickMXN {
-    @Shadow public Inventory getInventory() {
-        return null;
-    }
+    AttributeModifier a = new AttributeModifier("max_health", 10, AttributeModifier.Operation.ADDITION);
 
-    public abstract FoodData getHungerManager();
+    @Shadow public abstract Inventory getInventory();
+
+    @Shadow public abstract FoodData getFoodData();
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void onAttributes(CallbackInfo ci) {
         Inventory inv = getInventory();
 
         if (findItemInInventory(inv, saturation_artifact)) {
-            if (getHungerManager().needsFood()) {
-                getHungerManager().setFoodLevel(20);
+            if (getFoodData().needsFood()) {
+                getFoodData().setFoodLevel(20);
             }
         }
         if (findItemInInventory(inv, toughness_artifact)) {
-            //
+            if(!getInventory().player.getAttributes().hasModifier(Attributes.MAX_HEALTH, a.getId())) {
+                getInventory().player.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(a);
+                getInventory().player.setHealth(getInventory().player.getHealth());
+            }
         } else {
-            //
+            if(getInventory().player.getAttributes().hasModifier(Attributes.MAX_HEALTH, a.getId())) {
+                getInventory().player.getAttribute(Attributes.MAX_HEALTH).removeModifier(a.getId());
+                getInventory().player.setHealth(getInventory().player.getHealth());
+            }
         }
 
         if (inv.getSelected().getItem() instanceof BowItem || inv.getSelected().getItem() instanceof CrossbowItem);
         {
-            if (inv.getSelected().getItem() instanceof BowItem) {
-                if (findItemInInventory(inv, hunter_artifact)) {
-                    inv.getSelected().getOrCreateTag().putBoolean("artifact", true);
-                }
-                else {
-                    inv.getSelected().getOrCreateTag().putBoolean("artifact", false);
-                }
-            }
+                inv.getSelected().getOrCreateTag().putBoolean("artifact", findItemInInventory(inv, hunter_artifact));
         }
     }
 }

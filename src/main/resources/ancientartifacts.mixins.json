@@ -6,7 +6,9 @@
   "mixins": [
     "PlayerTickMXN",
     "BowItemMXN",
-    "ItemPropertiesMXN"
+    "ItemPropertiesMXN",
+    "LivingEntityMXN",
+    "CrossBowItemMXN"
   ],
   "client": [
   ],
