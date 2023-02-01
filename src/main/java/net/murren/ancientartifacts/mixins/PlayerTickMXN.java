@@ -19,14 +19,15 @@ import static net.murren.ancientartifacts.item.ArtifactItems.*;
 
 @Mixin(Player.class)
 abstract class PlayerTickMXN {
-    AttributeModifier a = new AttributeModifier("max_health", 10, AttributeModifier.Operation.ADDITION);
+    AttributeModifier a = new AttributeModifier("max_health", 2, AttributeModifier.Operation.MULTIPLY_BASE);
+    AttributeModifier b = new AttributeModifier("reach", 0.5, AttributeModifier.Operation.MULTIPLY_BASE);
 
     @Shadow public abstract Inventory getInventory();
 
     @Shadow public abstract FoodData getFoodData();
 
     @Inject(method = "tick", at = @At("HEAD"))
-    private void onAttributes(CallbackInfo ci) {
+    private void ancientArtifacts$POnAttributes(CallbackInfo ci) {
         Inventory inv = getInventory();
 
         if (findItemInInventory(inv, saturation_artifact)) {
@@ -34,13 +35,17 @@ abstract class PlayerTickMXN {
                 getFoodData().setFoodLevel(20);
             }
         }
-        if (findItemInInventory(inv, toughness_artifact)) {
-            if(!getInventory().player.getAttributes().hasModifier(Attributes.MAX_HEALTH, a.getId())) {
+        if (findItemInInventory(inv, toughness_artifact))
+        {
+            if(!getInventory().player.getAttributes().hasModifier(Attributes.MAX_HEALTH, a.getId()) && getInventory().player.getMaxHealth() < 30)
+            {
                 getInventory().player.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(a);
                 getInventory().player.setHealth(getInventory().player.getHealth());
             }
-        } else {
-            if(getInventory().player.getAttributes().hasModifier(Attributes.MAX_HEALTH, a.getId())) {
+        } else
+        {
+            if(getInventory().player.getAttributes().hasModifier(Attributes.MAX_HEALTH, a.getId()))
+            {
                 getInventory().player.getAttribute(Attributes.MAX_HEALTH).removeModifier(a.getId());
                 getInventory().player.setHealth(getInventory().player.getHealth());
             }
@@ -49,6 +54,22 @@ abstract class PlayerTickMXN {
         if (inv.getSelected().getItem() instanceof BowItem || inv.getSelected().getItem() instanceof CrossbowItem);
         {
                 inv.getSelected().getOrCreateTag().putBoolean("artifact", findItemInInventory(inv, hunter_artifact));
+        }
+
+        if(findItemInInventory(inv, sneak_artifact))
+        {
+            if(!getInventory().player.getAttributes().hasModifier(Attributes.FOLLOW_RANGE, b.getId()))
+            {
+                getInventory().player.getAttribute(Attributes.FOLLOW_RANGE).addPermanentModifier(b);
+                getInventory().player.setHealth(getInventory().player.getHealth());
+            }
+        } else
+        {
+            if(getInventory().player.getAttributes().hasModifier(Attributes.FOLLOW_RANGE, b.getId()))
+            {
+                getInventory().player.getAttribute(Attributes.FOLLOW_RANGE).removeModifier(b.getId());
+                getInventory().player.setHealth(getInventory().player.getHealth());
+            }
         }
     }
 }

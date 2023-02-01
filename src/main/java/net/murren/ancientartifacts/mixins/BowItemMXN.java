@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class BowItemMXN {
 
     @ModifyVariable(method = "releaseUsing", name = "bl", at = @At(value = "STORE"), ordinal = 0)
-    public boolean editbl(boolean bl, ItemStack itemStack, Level level, LivingEntity livingEntity, int i)
+    public boolean ancientArtifacts$BEditbl(boolean bl, ItemStack itemStack, Level level, LivingEntity livingEntity, int i)
     {
         if (livingEntity instanceof Player player) {
             if(itemStack.getOrCreateTag().getBoolean("artifacts"))
@@ -35,7 +35,7 @@ public abstract class BowItemMXN {
         return false;
     }
     @ModifyVariable(method = "releaseUsing", name = "bl2", at = @At(value = "STORE"), ordinal = 0)
-    public boolean editbl2(boolean bl2, ItemStack itemStack, Level level, LivingEntity livingEntity, int i)
+    public boolean ancientArtifacts$B_Editbl2(boolean bl2, ItemStack itemStack, Level level, LivingEntity livingEntity, int i)
     {
         if (livingEntity instanceof Player player) {
             if(itemStack.getOrCreateTag().getBoolean("artifacts"))
@@ -51,7 +51,7 @@ public abstract class BowItemMXN {
     }
 
     @Inject(at = @At("HEAD"), cancellable = true, method = "use(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResultHolder;")
-    private void init(Level level, Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
+    private void ancientArtifacts$B_FixArrow(Level level, Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
         ItemStack stack = player.getItemInHand(hand);
         if (stack.getOrCreateTag().getBoolean("artifact")) {
             player.startUsingItem(hand);
@@ -60,7 +60,7 @@ public abstract class BowItemMXN {
     }
 
     @Inject(method = "getUseDuration", at = @At("HEAD"), cancellable = true)
-    public void useDur(ItemStack itemStack, CallbackInfoReturnable<Integer> cir)
+    public void ancientArtifacts$B_UseDur(ItemStack itemStack, CallbackInfoReturnable<Integer> cir)
     {
         if(itemStack.getOrCreateTag().contains("artifact"))
         {
@@ -73,7 +73,7 @@ public abstract class BowItemMXN {
     }
 
     @Inject(method = "getPowerForTime", at = @At("TAIL"), cancellable = true)
-    private static void getPow(int i, CallbackInfoReturnable<Float> cir)
+    private static void ancientArtifacts$B_GetPow(int i, CallbackInfoReturnable<Float> cir)
     {
         if(i > 70000)
         {
