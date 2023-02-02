@@ -21,6 +21,8 @@ public class ArtifactItems
             new Item(new FabricItemSettings().group(ArtifactItemGroup.ARTIFACTS).maxCount(1).rarity(Rarity.EPIC)));
     public static final Item sneak_artifact = registerItem("sneak_artifact",
             new Item(new FabricItemSettings().group(ArtifactItemGroup.ARTIFACTS).maxCount(1).rarity(Rarity.EPIC)));
+    public static final Item reach_artifact = registerItem("reach_artifact",
+            new Item(new FabricItemSettings().group(ArtifactItemGroup.ARTIFACTS).maxCount(1).rarity(Rarity.EPIC)));
 
     private static Item registerItem(String name, Item item)
     {

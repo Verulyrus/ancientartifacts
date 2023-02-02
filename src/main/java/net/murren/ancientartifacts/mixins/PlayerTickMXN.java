@@ -1,5 +1,8 @@
 package net.murren.ancientartifacts.mixins;
 
+import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Inventory;
@@ -19,8 +22,9 @@ import static net.murren.ancientartifacts.item.ArtifactItems.*;
 
 @Mixin(Player.class)
 abstract class PlayerTickMXN {
-    AttributeModifier a = new AttributeModifier("max_health", 2, AttributeModifier.Operation.MULTIPLY_BASE);
-    AttributeModifier b = new AttributeModifier("reach", 0.5, AttributeModifier.Operation.MULTIPLY_BASE);
+    AttributeModifier a = new AttributeModifier("max_health", 1.5d, AttributeModifier.Operation.MULTIPLY_BASE);
+    AttributeModifier b = new AttributeModifier("sneak", 0.5d, AttributeModifier.Operation.MULTIPLY_BASE);
+    AttributeModifier c = new AttributeModifier("reach", 2d, AttributeModifier.Operation.ADDITION);
 
     @Shadow public abstract Inventory getInventory();
 
@@ -41,6 +45,7 @@ abstract class PlayerTickMXN {
             {
                 getInventory().player.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(a);
                 getInventory().player.setHealth(getInventory().player.getHealth());
+                getInventory().player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 1, 10, true, false, true));
             }
         } else
         {
@@ -56,19 +61,20 @@ abstract class PlayerTickMXN {
                 inv.getSelected().getOrCreateTag().putBoolean("artifact", findItemInInventory(inv, hunter_artifact));
         }
 
-        if(findItemInInventory(inv, sneak_artifact))
+        if(findItemInInventory(inv, reach_artifact))
         {
-            if(!getInventory().player.getAttributes().hasModifier(Attributes.FOLLOW_RANGE, b.getId()))
-            {
-                getInventory().player.getAttribute(Attributes.FOLLOW_RANGE).addPermanentModifier(b);
-                getInventory().player.setHealth(getInventory().player.getHealth());
+            if(!getInventory().player.getAttributes().hasModifier(ReachEntityAttributes.REACH, c.getId())) {
+                getInventory().player.getAttribute(ReachEntityAttributes.REACH).addPermanentModifier(c);
             }
-        } else
-        {
-            if(getInventory().player.getAttributes().hasModifier(Attributes.FOLLOW_RANGE, b.getId()))
-            {
-                getInventory().player.getAttribute(Attributes.FOLLOW_RANGE).removeModifier(b.getId());
-                getInventory().player.setHealth(getInventory().player.getHealth());
+            if(!getInventory().player.getAttributes().hasModifier(ReachEntityAttributes.ATTACK_RANGE, c.getId())) {
+                getInventory().player.getAttribute(ReachEntityAttributes.ATTACK_RANGE).addPermanentModifier(c);
+            }
+        } else {
+            if(getInventory().player.getAttributes().hasModifier(ReachEntityAttributes.REACH, c.getId())) {
+                getInventory().player.getAttribute(ReachEntityAttributes.REACH).removeModifier(c);
+            }
+            if(getInventory().player.getAttributes().hasModifier(ReachEntityAttributes.ATTACK_RANGE, c.getId())) {
+                getInventory().player.getAttribute(ReachEntityAttributes.ATTACK_RANGE).removeModifier(c);
             }
         }
     }

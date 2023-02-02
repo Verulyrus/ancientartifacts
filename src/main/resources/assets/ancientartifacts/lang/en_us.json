@@ -3,6 +3,8 @@
   "item.ancientartifacts.saturation_artifact": "Ancient Artifact of Saturation",
   "item.ancientartifacts.empty_artifact": "Mysterious Ancient Artifact",
   "item.ancientartifacts.hunter_artifact": "Ancient Hunters Artifact",
+  "item.ancientartifacts.sneak_artifact": "Ancient Artifact of Stealth",
+  "item.ancientartifacts.reach_artifact": "Ancient Artifact of Reach",
 
   "itemGroup.ancientartifacts.artifacts": "Ancient Artifacts"
 }
