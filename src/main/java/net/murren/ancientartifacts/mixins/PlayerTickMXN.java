@@ -34,21 +34,30 @@ abstract class PlayerTickMXN {
     private void ancientArtifacts$POnAttributes(CallbackInfo ci) {
         Inventory inv = getInventory();
 
+        //SATURATION ARTIFACT
         if (findItemInInventory(inv, saturation_artifact)) {
             if (getFoodData().needsFood()) {
                 getFoodData().setFoodLevel(20);
             }
         }
+
+        //TOUGHNESS ARTIFACT - ITEM
         if (findItemInInventory(inv, toughness_artifact))
         {
-            if(!getInventory().player.getAttributes().hasModifier(Attributes.MAX_HEALTH, a.getId()) && getInventory().player.getMaxHealth() < 30)
-            {
+            getInventory().player.getTags().add("hpartifact");
+        } else
+        {
+            getInventory().player.getTags().remove("hpartifact");
+        }
+        //TOUGHNESS ARTIFACT - EFFECT
+        if(getInventory().player.getTags().contains("hpartifact"))
+        {
+            if(!getInventory().player.getAttributes().hasModifier(Attributes.MAX_HEALTH, a.getId())) {
                 getInventory().player.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(a);
                 getInventory().player.setHealth(getInventory().player.getHealth());
                 getInventory().player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 1, 10, true, false, true));
             }
-        } else
-        {
+        } else {
             if(getInventory().player.getAttributes().hasModifier(Attributes.MAX_HEALTH, a.getId()))
             {
                 getInventory().player.getAttribute(Attributes.MAX_HEALTH).removeModifier(a.getId());
@@ -56,11 +65,13 @@ abstract class PlayerTickMXN {
             }
         }
 
+        //HUNTERS ARTIFACT
         if (inv.getSelected().getItem() instanceof BowItem || inv.getSelected().getItem() instanceof CrossbowItem);
         {
                 inv.getSelected().getOrCreateTag().putBoolean("artifact", findItemInInventory(inv, hunter_artifact));
         }
 
+        //REACH ARTIFACT
         if(findItemInInventory(inv, reach_artifact))
         {
             if(!getInventory().player.getAttributes().hasModifier(ReachEntityAttributes.REACH, c.getId())) {
