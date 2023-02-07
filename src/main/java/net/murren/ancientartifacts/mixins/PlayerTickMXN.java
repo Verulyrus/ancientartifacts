@@ -4,7 +4,6 @@ import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
@@ -17,22 +16,24 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 
-import static net.murren.ancientartifacts.Util.InventoryItemFind.findItemInInventory;
-import static net.murren.ancientartifacts.item.ArtifactItems.*;
+import static net.murren.ancientartifacts.util.InventoryItemFind.findItemInInventory;
+import static net.murren.ancientartifacts.Registers.ArtifactItems.*;
 
 @Mixin(Player.class)
 abstract class PlayerTickMXN {
-    AttributeModifier a = new AttributeModifier("max_health", 1.5d, AttributeModifier.Operation.MULTIPLY_BASE);
-    AttributeModifier b = new AttributeModifier("sneak", 0.5d, AttributeModifier.Operation.MULTIPLY_BASE);
     AttributeModifier c = new AttributeModifier("reach", 2d, AttributeModifier.Operation.ADDITION);
 
     @Shadow public abstract Inventory getInventory();
 
     @Shadow public abstract FoodData getFoodData();
 
+
+
+
     @Inject(method = "tick", at = @At("HEAD"))
     private void ancientArtifacts$POnAttributes(CallbackInfo ci) {
         Inventory inv = getInventory();
+        Player player = getInventory().player;
 
         //SATURATION ARTIFACT
         if (findItemInInventory(inv, saturation_artifact)) {
@@ -41,28 +42,11 @@ abstract class PlayerTickMXN {
             }
         }
 
-        //TOUGHNESS ARTIFACT - ITEM
+        //TOUGHNESS ARTIFACT
         if (findItemInInventory(inv, toughness_artifact))
         {
-            getInventory().player.getTags().add("hpartifact");
-        } else
-        {
-            getInventory().player.getTags().remove("hpartifact");
-        }
-        //TOUGHNESS ARTIFACT - EFFECT
-        if(getInventory().player.getTags().contains("hpartifact"))
-        {
-            if(!getInventory().player.getAttributes().hasModifier(Attributes.MAX_HEALTH, a.getId())) {
-                getInventory().player.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(a);
-                getInventory().player.setHealth(getInventory().player.getHealth());
-                getInventory().player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 1, 10, true, false, true));
-            }
-        } else {
-            if(getInventory().player.getAttributes().hasModifier(Attributes.MAX_HEALTH, a.getId()))
-            {
-                getInventory().player.getAttribute(Attributes.MAX_HEALTH).removeModifier(a.getId());
-                getInventory().player.setHealth(getInventory().player.getHealth());
-            }
+            player.addEffect(new MobEffectInstance(MobEffects.HEALTH_BOOST, 1, 4, true, true));
+            player.setHealth(player.getHealth());
         }
 
         //HUNTERS ARTIFACT
@@ -74,18 +58,13 @@ abstract class PlayerTickMXN {
         //REACH ARTIFACT
         if(findItemInInventory(inv, reach_artifact))
         {
-            if(!getInventory().player.getAttributes().hasModifier(ReachEntityAttributes.REACH, c.getId())) {
-                getInventory().player.getAttribute(ReachEntityAttributes.REACH).addPermanentModifier(c);
-            }
-            if(!getInventory().player.getAttributes().hasModifier(ReachEntityAttributes.ATTACK_RANGE, c.getId())) {
-                getInventory().player.getAttribute(ReachEntityAttributes.ATTACK_RANGE).addPermanentModifier(c);
-            }
+
         } else {
-            if(getInventory().player.getAttributes().hasModifier(ReachEntityAttributes.REACH, c.getId())) {
-                getInventory().player.getAttribute(ReachEntityAttributes.REACH).removeModifier(c);
+            if(player.getAttributes().hasModifier(ReachEntityAttributes.REACH, c.getId())) {
+                player.getAttribute(ReachEntityAttributes.REACH).removeModifier(c);
             }
-            if(getInventory().player.getAttributes().hasModifier(ReachEntityAttributes.ATTACK_RANGE, c.getId())) {
-                getInventory().player.getAttribute(ReachEntityAttributes.ATTACK_RANGE).removeModifier(c);
+            if(player.getAttributes().hasModifier(ReachEntityAttributes.ATTACK_RANGE, c.getId())) {
+                player.getAttribute(ReachEntityAttributes.ATTACK_RANGE).removeModifier(c);
             }
         }
     }

@@ -1,4 +1,4 @@
-package net.murren.ancientartifacts.item;
+package net.murren.ancientartifacts.Registers;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.core.Registry;

@@ -1,10 +1,11 @@
-package net.murren.ancientartifacts.item;
+package net.murren.ancientartifacts.Registers;
 
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.murren.ancientartifacts.Main;
+import net.murren.ancientartifacts.Registers.ArtifactItems;
 
 public class ArtifactItemGroup
 {

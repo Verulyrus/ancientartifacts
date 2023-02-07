@@ -1,4 +1,4 @@
-package net.murren.ancientartifacts.Util;
+package net.murren.ancientartifacts.util;
 
 
 import net.minecraft.world.entity.player.Inventory;
