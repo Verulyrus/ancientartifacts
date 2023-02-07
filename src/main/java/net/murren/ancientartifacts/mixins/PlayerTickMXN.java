@@ -4,11 +4,17 @@ import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import static net.murren.ancientartifacts.util.attributeModifiers.c;
+import static net.murren.ancientartifacts.util.attributeModifiers.d;
+
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.CrossbowItem;
+import net.minecraft.world.phys.AABB;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -75,6 +81,27 @@ abstract class PlayerTickMXN {
                 player.getAttribute(ReachEntityAttributes.ATTACK_RANGE).removeModifier(c);
             }
         }
+
+        //SNEAK ARTIFACT
+        /*if(findItemInInventory(inv, sneak_artifact))
+        {
+            player.level.getNearbyEntities(LivingEntity.class, TargetingConditions.forCombat(), player,
+                    new AABB(
+                            player.position().x - 16,
+                            player.position().y - 16,
+                            player.position().z - 16,
+                            player.position().x + 16,
+                            player.position().y + 16,
+                            player.position().z + 16)).forEach(e -> {
+                                if(e.getAttributes().hasAttribute(Attributes.FOLLOW_RANGE))
+                                {
+                                    if(!e.getAttributes().hasModifier(Attributes.FOLLOW_RANGE, d.getId()))
+                                    {
+                                        e.getAttribute(Attributes.FOLLOW_RANGE).addPermanentModifier(d);
+                                    }
+                                }
+            });
+        }*/
     }
 }
 
