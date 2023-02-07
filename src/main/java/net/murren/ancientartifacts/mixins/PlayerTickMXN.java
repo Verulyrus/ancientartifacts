@@ -3,7 +3,7 @@ package net.murren.ancientartifacts.mixins;
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import static net.murren.ancientartifacts.util.attributeModifiers.c;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
@@ -21,14 +21,10 @@ import static net.murren.ancientartifacts.Registers.ArtifactItems.*;
 
 @Mixin(Player.class)
 abstract class PlayerTickMXN {
-    AttributeModifier c = new AttributeModifier("reach", 2d, AttributeModifier.Operation.ADDITION);
 
     @Shadow public abstract Inventory getInventory();
 
     @Shadow public abstract FoodData getFoodData();
-
-
-
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void ancientArtifacts$POnAttributes(CallbackInfo ci) {
@@ -45,20 +41,32 @@ abstract class PlayerTickMXN {
         //TOUGHNESS ARTIFACT
         if (findItemInInventory(inv, toughness_artifact))
         {
-            player.addEffect(new MobEffectInstance(MobEffects.HEALTH_BOOST, 1, 4, true, true));
-            player.setHealth(player.getHealth());
+            if(!player.hasEffect(MobEffects.HEALTH_BOOST)) {
+                player.addEffect(new MobEffectInstance(MobEffects.HEALTH_BOOST, 999999999, 4, true, true));
+                player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 40, 12, true, true));
+            }
+        }
+        else {
+            if(player.hasEffect(MobEffects.HEALTH_BOOST)) {
+                player.removeEffect(MobEffects.HEALTH_BOOST);
+            }
         }
 
         //HUNTERS ARTIFACT
         if (inv.getSelected().getItem() instanceof BowItem || inv.getSelected().getItem() instanceof CrossbowItem);
         {
-                inv.getSelected().getOrCreateTag().putBoolean("artifact", findItemInInventory(inv, hunter_artifact));
+            inv.getSelected().getOrCreateTag().putBoolean("artifact", findItemInInventory(inv, hunter_artifact));
         }
 
         //REACH ARTIFACT
         if(findItemInInventory(inv, reach_artifact))
         {
-
+            if(!player.getAttributes().hasModifier(ReachEntityAttributes.REACH, c.getId())) {
+                player.getAttribute(ReachEntityAttributes.REACH).addPermanentModifier(c);
+            }
+            if(!player.getAttributes().hasModifier(ReachEntityAttributes.ATTACK_RANGE, c.getId())) {
+                player.getAttribute(ReachEntityAttributes.ATTACK_RANGE).addPermanentModifier(c);
+            }
         } else {
             if(player.getAttributes().hasModifier(ReachEntityAttributes.REACH, c.getId())) {
                 player.getAttribute(ReachEntityAttributes.REACH).removeModifier(c);

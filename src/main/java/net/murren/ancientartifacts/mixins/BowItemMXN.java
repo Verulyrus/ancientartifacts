@@ -6,7 +6,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
@@ -31,21 +30,6 @@ public abstract class BowItemMXN {
                 bl = player.getAbilities().instabuild || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, itemStack) > 0;
             }
             return bl;
-        }
-        return false;
-    }
-    @ModifyVariable(method = "releaseUsing", name = "bl2", at = @At(value = "STORE"), ordinal = 0)
-    public boolean ancientArtifacts$B_Editbl2(boolean bl2, ItemStack itemStack, Level level, LivingEntity livingEntity, int i)
-    {
-        if (livingEntity instanceof Player player) {
-            if(itemStack.getOrCreateTag().getBoolean("artifacts"))
-            {
-                return true;
-            }
-            else {
-                bl2 = player.getProjectile(itemStack).is(Items.ARROW);
-            }
-            return bl2;
         }
         return false;
     }
