@@ -33,6 +33,17 @@ public abstract class BowItemMXN {
         }
         return false;
     }
+    @ModifyVariable(method = "releaseUsing", name = "bl2", at = @At(value = "STORE"), ordinal = 0)
+    public boolean ancientArtifacts$BEditbl2(boolean bl2, ItemStack itemStack, Level level, LivingEntity livingEntity, int i)
+    {
+        if (livingEntity instanceof Player) {
+            if(itemStack.getOrCreateTag().getBoolean("artifacts"))
+            {
+                return true;
+            }
+        }
+        return bl2;
+    }
 
     @Inject(at = @At("HEAD"), cancellable = true, method = "use(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResultHolder;")
     private void ancientArtifacts$B_FixArrow(Level level, Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
