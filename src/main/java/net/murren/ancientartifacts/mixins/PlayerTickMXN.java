@@ -4,17 +4,12 @@ import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import static net.murren.ancientartifacts.util.attributeModifiers.c;
-import static net.murren.ancientartifacts.util.attributeModifiers.d;
 
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.CrossbowItem;
-import net.minecraft.world.phys.AABB;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -23,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 
 import static net.murren.ancientartifacts.util.InventoryItemFind.findItemInInventory;
-import static net.murren.ancientartifacts.Registers.ArtifactItems.*;
+import static net.murren.ancientartifacts.registers.ArtifactItems.*;
 
 @Mixin(Player.class)
 abstract class PlayerTickMXN {

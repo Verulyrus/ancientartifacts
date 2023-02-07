@@ -6,5 +6,12 @@
   "item.ancientartifacts.sneak_artifact": "Ancient Artifact of Stealth",
   "item.ancientartifacts.reach_artifact": "Ancient Artifact of Reach",
 
+  "item.ancientartifacts.toughness_artifact.tooltip": "An ancient artifact with a mysterious power to double your health.",
+  "item.ancientartifacts.saturation_artifact.tooltip": "An ancient artifact with a mysterious power to eradicate your hunger.",
+  "item.ancientartifacts.empty_artifact.tooltip": "A mysterious item... What could it be used for?",
+  "item.ancientartifacts.hunter_artifact.tooltip": "An ancient artifact the hunters of the old times used... What mysterious powers does it posess?",
+  "item.ancientartifacts.sneak_artifact.tooltip": "COMING SOON",
+  "item.ancientartifacts.reach_artifact.tooltip": "An ancient artifact with a mysterious power to allow you to reach much farther.",
+
   "itemGroup.ancientartifacts.artifacts": "Ancient Artifacts"
 }

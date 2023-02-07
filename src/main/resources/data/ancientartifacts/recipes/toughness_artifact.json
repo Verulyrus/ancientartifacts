@@ -1,0 +1,33 @@
+{
+  "type":"minecraft:crafting_shaped",
+  "pattern": [
+    "XAX",
+    "B#C",
+    "XDX"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "A": {
+      "item": "minecraft:netherite_chestplate"
+    },
+    "B": {
+      "item": "minecraft:diamond_chestplate"
+    },
+    "C": {
+      "item": "minecraft:iron_chestplate"
+    },
+    "D": {
+      "item": "minecraft:golden_chestplate"
+    },
+    "#": {
+      "item": "ancientartifacts:empty_artifact"
+    }
+  },
+  "result": {
+    "item": "ancientartifacts:toughness_artifact",
+    "count": 1,
+    "group": "artifacts"
+  }
+}

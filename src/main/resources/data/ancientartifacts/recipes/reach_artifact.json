@@ -1,0 +1,33 @@
+{
+  "type":"minecraft:crafting_shaped",
+  "pattern": [
+    "XAX",
+    "B#C",
+    "XDX"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "A": {
+      "item": "minecraft:blaze_rod"
+    },
+    "B": {
+      "item": "minecraft:end_rod"
+    },
+    "C": {
+      "item": "minecraft:lightning_rod"
+    },
+    "D": {
+      "item": "minecraft:fishing_rod"
+    },
+    "#": {
+      "item": "ancientartifacts:empty_artifact"
+    }
+  },
+  "result": {
+    "item": "ancientartifacts:reach_artifact",
+    "count": 1,
+    "group": "artifacts"
+  }
+}

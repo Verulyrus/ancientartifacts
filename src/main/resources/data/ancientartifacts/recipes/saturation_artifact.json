@@ -1,0 +1,33 @@
+{
+  "type":"minecraft:crafting_shaped",
+  "pattern": [
+    "XAX",
+    "B#C",
+    "XDX"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "A": {
+      "item": "minecraft:golden_apple"
+    },
+    "B": {
+      "item": "minecraft:golden_carrot"
+    },
+    "C": {
+      "item": "minecraft:glistering_melon_slice"
+    },
+    "D": {
+      "item": "minecraft:enchanted_golden_apple"
+    },
+    "#": {
+      "item": "ancientartifacts:empty_artifact"
+    }
+  },
+  "result": {
+    "item": "ancientartifacts:saturation_artifact",
+    "count": 1,
+    "group": "artifacts"
+  }
+}

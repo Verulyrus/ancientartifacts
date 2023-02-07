@@ -1,0 +1,24 @@
+{
+  "type":"minecraft:crafting_shaped",
+  "pattern": [
+    "ABA",
+    "B#B",
+    "ABA"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:netherite_block"
+    },
+    "B": {
+      "item": "minecraft:crying_obsidian"
+    },
+    "#": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "result": {
+    "item": "ancientartifacts:empty_artifact",
+    "count": 1,
+    "group": "artifacts"
+  }
+}

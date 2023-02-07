@@ -1,0 +1,27 @@
+{
+  "type":"minecraft:crafting_shaped",
+  "pattern": [
+    "XAX",
+    "B#B",
+    "XAX"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "A": {
+      "item": "minecraft:crossbow"
+    },
+    "B": {
+      "item": "minecraft:bow"
+    },
+    "#": {
+      "item": "ancientartifacts:empty_artifact"
+    }
+  },
+  "result": {
+    "item": "ancientartifacts:hunter_artifact",
+    "count": 1,
+    "group": "artifacts"
+  }
+}
