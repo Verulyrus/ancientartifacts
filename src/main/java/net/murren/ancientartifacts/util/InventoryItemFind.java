@@ -17,7 +17,7 @@ public class InventoryItemFind {
             if (inv.getItem(i).getItem().equals(item)) {
                 return true;
             }
-            if(inv.getItem(i).is(SHULKER_BOX) && inv.getItem(i).hasTag())
+            if(inv.getItem(i).is(SHULKER_BOXES) && inv.getItem(i).hasTag())
             {
                 logMessage("found shulker box with tag");
                 NonNullList<ItemStack> box = NonNullList.create();

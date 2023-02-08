@@ -24,7 +24,6 @@ public class ArtifactItems
             new SneakArtifactItem(new FabricItemSettings().group(ArtifactItemGroup.ARTIFACTS).maxCount(1).rarity(Rarity.EPIC)));
     public static final Item reach_artifact = registerItem("reach_artifact",
             new ReachArtifactItem(new FabricItemSettings().group(ArtifactItemGroup.ARTIFACTS).maxCount(1).rarity(Rarity.EPIC)));
-
     private static Item registerItem(String name, Item item)
     {
         return Registry.register(Registry.ITEM, new ResourceLocation(MOD_ID, name), item);
