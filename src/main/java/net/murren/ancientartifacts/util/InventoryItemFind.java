@@ -1,8 +1,9 @@
 package net.murren.ancientartifacts.util;
 
-
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.Item;
+
+import static net.murren.ancientartifacts.util.tagKeys.Items.SHULKER_BOXES;
 
 public class InventoryItemFind {
     public static boolean findItemInInventory(Inventory inv, Item item)
@@ -10,6 +11,10 @@ public class InventoryItemFind {
         for (int i = 0; i < inv.getContainerSize(); i++) {
             if (inv.getItem(i).getItem().equals(item)) {
                 return true;
+            }
+            if(inv.getItem(i).is(SHULKER_BOXES))
+            {
+
             }
         }
         return false;
