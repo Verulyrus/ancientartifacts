@@ -15,6 +15,9 @@
   "entrypoints": {
     "main": [
       "net.murren.ancientartifacts.AncientArtifactsMod"
+    ],
+    "client": [
+      "net.murren.ancientartifacts.AncientArtifactsClientMod"
     ]
   },
   "mixins": [
