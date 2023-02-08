@@ -16,9 +16,7 @@ public class ArtifactEffects {
        RANGE_EFFECT = register(46, "range_boost", (new HealthBoostMobEffect(MobEffectCategory.BENEFICIAL, 445292)).addAttributeModifier(ReachEntityAttributes.REACH, "f63273c7-977d-49b1-8510-7b2d80f95ea2", 2d, AttributeModifier.Operation.ADDITION));
     }
 
-    public static void registerArtifactEffects()
-    {
-    }
+    public static void registerArtifactEffects(){}
 
     private static MobEffect register(int i, String string, MobEffect mobEffect) {
         return Registry.registerMapping(Registry.MOB_EFFECT, i, string, mobEffect);

@@ -1,7 +1,5 @@
 package net.murren.ancientartifacts.mixins;
 
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BowItem;
@@ -24,7 +22,7 @@ public abstract class BowItemMXN {
         if (livingEntity instanceof Player player) {
             if(itemStack.getOrCreateTag().getBoolean("artifacts"))
             {
-                return true;
+                bl = true;
             }
             else {
                 bl = player.getAbilities().instabuild || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, itemStack) > 0;
@@ -39,20 +37,20 @@ public abstract class BowItemMXN {
         if (livingEntity instanceof Player) {
             if(itemStack.getOrCreateTag().getBoolean("artifacts"))
             {
-                return true;
+                bl2 = true;
             }
         }
         return bl2;
     }
 
-    @Inject(at = @At("HEAD"), cancellable = true, method = "use(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResultHolder;")
+    /*@Inject(at = @At("HEAD"), cancellable = true, method = "use(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResultHolder;")
     private void ancientArtifacts$B_FixArrow(Level level, Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
         ItemStack stack = player.getItemInHand(hand);
         if (stack.getOrCreateTag().getBoolean("artifact")) {
             player.startUsingItem(hand);
             cir.setReturnValue(InteractionResultHolder.success(stack));
         }
-    }
+    }*/
 
     @Inject(method = "getUseDuration", at = @At("HEAD"), cancellable = true)
     public void ancientArtifacts$B_UseDur(ItemStack itemStack, CallbackInfoReturnable<Integer> cir)

@@ -29,8 +29,8 @@ public class ReachArtifactItem extends Item {
     {
         if(entity instanceof Player p && !level.isClientSide && level.getGameTime()%20==0)
         {
-            p.addEffect(new MobEffectInstance(ArtifactEffects.REACH_EFFECT, 25, 1, true, true));
-            p.addEffect(new MobEffectInstance(ArtifactEffects.RANGE_EFFECT, 25, 1, true, true));
+            p.addEffect(new MobEffectInstance(ArtifactEffects.REACH_EFFECT, 25, 0, true, true));
+            p.addEffect(new MobEffectInstance(ArtifactEffects.RANGE_EFFECT, 25, 0, true, true));
         }
     }
 }
