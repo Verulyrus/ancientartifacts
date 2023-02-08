@@ -24,7 +24,7 @@ public abstract class CrossBowItemMXN {
         }
         return livingEntity instanceof Player && ((Player)livingEntity).getAbilities().instabuild;
     }
-    @ModifyVariable(method = "loadProjectile", name = "bl3", at = @At(value = "STORE"), ordinal = 0)
+    @ModifyVariable(method = "loadProjectile", name = "bl3", at = @At(value = "STORE"), ordinal = 0, argsOnly = true)
     private static boolean ancientArtifacts$CB_Editbl3(boolean bl3, LivingEntity livingEntity, ItemStack itemStack, ItemStack itemStack2, boolean bl, boolean bl2)
     {
         if(itemStack.getOrCreateTag().getBoolean("artifact") && livingEntity instanceof Player)
