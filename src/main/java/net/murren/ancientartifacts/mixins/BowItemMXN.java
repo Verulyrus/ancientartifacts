@@ -57,6 +57,7 @@ public abstract class BowItemMXN {
     @Inject(method = "getUseDuration", at = @At("HEAD"), cancellable = true)
     public void ancientArtifacts$B_UseDur(ItemStack itemStack, CallbackInfoReturnable<Integer> cir)
     {
+
         if(itemStack.getOrCreateTag().contains("artifact"))
         {
             if(itemStack.getTag().getBoolean("artifact"))
@@ -81,7 +82,5 @@ public abstract class BowItemMXN {
             cir.setReturnValue(k);
         }
     }
-
-
 
 }

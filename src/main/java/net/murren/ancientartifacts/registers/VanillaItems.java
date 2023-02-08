@@ -21,6 +21,6 @@ public class VanillaItems {
                 }
                 return livingEntity.getUseItem() != itemStack ? 0.0F : (float)(itemStack.getUseDuration() - livingEntity.getUseItemRemainingTicks()) / 20.0F;
             }
-        });;
+        });
     }
 }

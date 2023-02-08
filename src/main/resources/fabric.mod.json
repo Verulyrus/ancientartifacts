@@ -14,7 +14,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.murren.ancientartifacts.Main"
+      "net.murren.ancientartifacts.AncientArtifactsMod"
     ]
   },
   "mixins": [

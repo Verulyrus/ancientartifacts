@@ -5,10 +5,10 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
-import net.murren.ancientartifacts.Main;
+import net.murren.ancientartifacts.AncientArtifactsMod;
 import net.murren.ancientartifacts.items.*;
 
-import static net.murren.ancientartifacts.Main.MOD_ID;
+import static net.murren.ancientartifacts.AncientArtifactsMod.MOD_ID;
 
 public class ArtifactItems
 {
@@ -31,6 +31,6 @@ public class ArtifactItems
 
     public static void registerItems()
     {
-        Main.LOGGER.info("Registering Mod Items for " + MOD_ID);
+        AncientArtifactsMod.LOGGER.info("Registering Mod Items for " + MOD_ID);
     }
 }
