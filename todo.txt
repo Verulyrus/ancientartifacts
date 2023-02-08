@@ -1,0 +1,4 @@
+- Start shulker support
+- fix toughness artifact duration
+- add images and translations for reach/range effect
+- bugfix those mf bows
