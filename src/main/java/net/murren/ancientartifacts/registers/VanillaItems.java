@@ -5,8 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 
 public class VanillaItems {
-    public static void registerVanillaItems()
-    {
+    static {
         FabricModelPredicateProviderRegistry.register(Items.BOW, new ResourceLocation("pull"), (itemStack, clientLevel, livingEntity, i) -> {
             if (livingEntity == null) {
                 return 0.0F;
@@ -22,5 +21,9 @@ public class VanillaItems {
                 return livingEntity.getUseItem() != itemStack ? 0.0F : (float)(itemStack.getUseDuration() - livingEntity.getUseItemRemainingTicks()) / 20.0F;
             }
         });
+    }
+    public static void registerVanillaItems()
+    {
+
     }
 }
