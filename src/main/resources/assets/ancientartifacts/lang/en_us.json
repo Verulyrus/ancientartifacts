@@ -13,5 +13,8 @@
   "item.ancientartifacts.sneak_artifact.tooltip": "COMING SOON",
   "item.ancientartifacts.reach_artifact.tooltip": "An ancient artifact with a mysterious power to allow you to reach much farther.",
 
-  "itemGroup.ancientartifacts.artifacts": "Ancient Artifacts"
+  "itemGroup.ancientartifacts.artifacts": "Ancient Artifacts",
+
+  "effect.ancientartifacts.reach_boost": "Mysterious Effect of Reach",
+  "effect.ancientartifacts.range_boost": "Mysterious Effect of Range"
 }
