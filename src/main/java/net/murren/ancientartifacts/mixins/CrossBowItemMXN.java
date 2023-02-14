@@ -25,6 +25,15 @@ public abstract class CrossBowItemMXN {
         return livingEntity instanceof Player && ((Player)livingEntity).getAbilities().instabuild;
     }
 
+    @Inject(method = "loadProjectile", at = @At(value = "HEAD"), cancellable = true)
+    private static void ancientArtifacts$CB_Editbl3(LivingEntity livingEntity, ItemStack itemStack, ItemStack itemStack2, boolean bl, boolean bl2, CallbackInfoReturnable<Boolean> cir)
+    {
+        if(itemStack.getOrCreateTag().getBoolean("artifact") && livingEntity instanceof Player)
+        {
+            cir.setReturnValue(true);
+        }
+    }
+
     @Inject(method = "getChargeDuration", at = @At("HEAD"), cancellable = true)
     private static void ancientArtifacts$CB_FixChargeDur(ItemStack itemStack, CallbackInfoReturnable<Integer> cir)
     {
