@@ -1,4 +1,2 @@
-- Start shulker support (DONE, NOT TESTED)
-- fix toughness artifact duration (DONE, NOT TESTED)
-- add images and translations for reach/range effect (DONE, NOT TESTED)
-- bugfix those mf bows (DONE, NOT TESTED)
+- fix toughness artifact duration
+- Reimplement infinity on bows with artifact

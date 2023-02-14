@@ -18,15 +18,15 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static net.minecraft.world.item.Items.SHULKER_BOX;
 import static net.murren.ancientartifacts.registers.ArtifactItems.*;
+import static net.murren.ancientartifacts.util.TagKeys.SHULKER_BOXES;
 
 @Mixin(Item.class)
 public class ItemMXN {
     @Inject(method = "inventoryTick", at = @At("HEAD"))
     public void AncientArtifacts$ItemInventoryTick(ItemStack itemStack, Level level, Entity entity, int i, boolean bl, CallbackInfo ci)
     {
-        if(itemStack.is(SHULKER_BOX) && itemStack.hasTag() && entity instanceof Player p)
+        if(itemStack.is(SHULKER_BOXES) && itemStack.hasTag() && entity instanceof Player p)
         {
                 NonNullList<ItemStack> box = NonNullList.withSize(27, ItemStack.EMPTY);
                 CompoundTag tag = itemStack.getTag();
@@ -56,14 +56,17 @@ public class ItemMXN {
                     }
                     if(itemStack1.is(toughness_artifact))
                     {
-                        if(!level.isClientSide && level.getGameTime()%20==0)
-                        {
-                            if(!p.hasEffect(MobEffects.HEALTH_BOOST)) {
-                                p.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 40, 12, true, true));
+                            if(!level.isClientSide && level.getGameTime()%20==0)
+                            {
+                                if(!p.hasEffect(MobEffects.HEALTH_BOOST)) {
+                                    p.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 40, 12, true, true));
+                                }
+                                float a = p.getHealth();
+                                p.addEffect(new MobEffectInstance(MobEffects.HEALTH_BOOST, 45, 4, true, true));
+                                p.setHealth(a);
                             }
-                            p.addEffect(new MobEffectInstance(MobEffects.HEALTH_BOOST, 30, 4, true, true));
-                        }
                     }
+
                 });
 
         }

@@ -15,8 +15,8 @@ public class ArtifactEffects {
     public static final MobEffect RANGE_EFFECT;
 
     static {
-       REACH_EFFECT = register("reach_boost", (new HealthBoostMobEffect(MobEffectCategory.BENEFICIAL, 445291)).addAttributeModifier(ReachEntityAttributes.REACH, "60f6aced-542d-48ca-bb68-716e0fd16fbf", 2d, AttributeModifier.Operation.ADDITION));
-       RANGE_EFFECT = register("range_boost", (new HealthBoostMobEffect(MobEffectCategory.BENEFICIAL, 445292)).addAttributeModifier(ReachEntityAttributes.REACH, "f63273c7-977d-49b1-8510-7b2d80f95ea2", 2d, AttributeModifier.Operation.ADDITION));
+       REACH_EFFECT = register("reach_boost", (new HealthBoostMobEffect(MobEffectCategory.BENEFICIAL, 445291)).addAttributeModifier(ReachEntityAttributes.REACH, "60f6aced-542d-48ca-bb68-716e0fd16fbf", 1d, AttributeModifier.Operation.ADDITION));
+       RANGE_EFFECT = register("range_boost", (new HealthBoostMobEffect(MobEffectCategory.BENEFICIAL, 445292)).addAttributeModifier(ReachEntityAttributes.REACH, "f63273c7-977d-49b1-8510-7b2d80f95ea2", 1d, AttributeModifier.Operation.ADDITION));
     }
 
     public static void registerArtifactEffects(){}

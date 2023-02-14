@@ -16,18 +16,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(BowItem.class)
 public abstract class BowItemMXN {
 
-    @ModifyVariable(method = "releaseUsing", name = "bl", at = @At(value = "STORE"), ordinal = 0)
+    /*@ModifyVariable(method = "releaseUsing", name = "bl", at = @At(value = "STORE"), ordinal = 0)
     public boolean ancientArtifacts$BEditbl(boolean bl, ItemStack itemStack, Level level, LivingEntity livingEntity, int i)
     {
         if (livingEntity instanceof Player player) {
             if(itemStack.getOrCreateTag().getBoolean("artifacts"))
             {
-                bl = true;
+                return true;
             }
-            else {
-                bl = player.getAbilities().instabuild || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, itemStack) > 0;
-            }
-            return bl;
+            return player.getAbilities().instabuild || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, itemStack) > 0;
         }
         return false;
     }
@@ -37,11 +34,11 @@ public abstract class BowItemMXN {
         if (livingEntity instanceof Player) {
             if(itemStack.getOrCreateTag().getBoolean("artifacts"))
             {
-                bl2 = true;
+                return true;
             }
         }
         return bl2;
-    }
+    }*/
 
     /*@Inject(at = @At("HEAD"), cancellable = true, method = "use(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResultHolder;")
     private void ancientArtifacts$B_FixArrow(Level level, Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {

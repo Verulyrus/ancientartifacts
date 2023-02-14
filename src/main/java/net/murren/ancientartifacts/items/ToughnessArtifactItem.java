@@ -30,7 +30,9 @@ public class ToughnessArtifactItem extends Item {
             if(!p.hasEffect(MobEffects.HEALTH_BOOST)) {
                 p.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 40, 12, true, true));
             }
-            p.addEffect(new MobEffectInstance(MobEffects.HEALTH_BOOST, 30, 4, true, true));
+            float a = p.getHealth();
+            p.addEffect(new MobEffectInstance(MobEffects.HEALTH_BOOST, 45, 4, true, true));
+            p.setHealth(a);
         }
     }
 }
