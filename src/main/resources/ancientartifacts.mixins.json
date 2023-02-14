@@ -7,7 +7,7 @@
     "PlayerTickMXN",
     "BowItemMXN",
     "CrossBowItemMXN",
-    "ShulkerBoxItemMXN"
+    "ItemMXN"
   ],
   "client": [
   ],

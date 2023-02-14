@@ -22,7 +22,7 @@ import static net.minecraft.world.item.Items.SHULKER_BOX;
 import static net.murren.ancientartifacts.registers.ArtifactItems.*;
 
 @Mixin(Item.class)
-public class ShulkerBoxItemMXN {
+public class ItemMXN {
     @Inject(method = "inventoryTick", at = @At("HEAD"))
     public void AncientArtifacts$ItemInventoryTick(ItemStack itemStack, Level level, Entity entity, int i, boolean bl, CallbackInfo ci)
     {
