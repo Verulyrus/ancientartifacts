@@ -25,9 +25,11 @@ abstract class PlayerTickMXN {
         Inventory inv = getInventory();
 
         //HUNTERS ARTIFACT
-        if (inv.getSelected().getItem() instanceof BowItem || inv.getSelected().getItem() instanceof CrossbowItem);
+        if (inv.player.getMainHandItem().getItem() instanceof BowItem || inv.player.getMainHandItem().getItem() instanceof CrossbowItem);
         {
-            inv.getSelected().getOrCreateTag().putBoolean("artifact", findItemInInventory(inv, hunter_artifact));
+            if(findItemInInventory(inv, hunter_artifact)) {
+                inv.player.getMainHandItem().getOrCreateTag().putBoolean("artifact", true);
+            }
         }
     }
 }
